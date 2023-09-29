@@ -37,6 +37,10 @@ inputs:
     default: ''
     description: Extra args to be passed to the datadog-ci cli.
     required: false
+  datadog-ci-version:
+    default: 'latest'
+    description: The version used to install datadog-ci
+    required: false
 runs:
   using: "composite"
   steps:
@@ -46,7 +50,7 @@ runs:
         node-version: ${{ inputs.node-version }}
     - name: Get Datadog CLI
       shell: bash
-      run: npm install -g @datadog/datadog-ci
+      run: npm install -g @datadog/datadog-ci@datadog-ci-version
     - name: Upload the JUnit files
       if: ${{ inputs.logs == 'true' }}
       shell: bash
